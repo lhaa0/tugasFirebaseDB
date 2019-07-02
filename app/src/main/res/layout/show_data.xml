@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="8dp"
+              android:id="@+id/ll_contact">
+
+    <TextView
+            android:id="@+id/tv_judul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            tools:text="judul"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+    <TextView
+            android:id="@+id/tv_penulis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            tools:text="judul"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+    <TextView
+            android:id="@+id/tv_tanggal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            tools:text="judul"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
+</LinearLayout>
