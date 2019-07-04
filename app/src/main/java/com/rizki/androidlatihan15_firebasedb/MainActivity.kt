@@ -111,6 +111,7 @@ class MainActivity : AppCompatActivity() {
         if (user != null) {
             helperPref.saveUID(user.uid)
             startActivity(Intent(this, MainPage::class.java))
+            finish()
         } else {
             e("TAG_ERROR", "User tidak ada")
         }

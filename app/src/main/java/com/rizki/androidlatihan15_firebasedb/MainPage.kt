@@ -5,13 +5,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log.e
 import android.view.Display
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.main_page.*
 
-class MainPage : AppCompatActivity() {
+class MainPage : AppCompatActivity(), AdapterBook.FirebaseDataListener {
+
 
     private var bookAdapter : AdapterBook? = null
 //    private var rcView : RecyclerView? = null
@@ -41,7 +43,7 @@ class MainPage : AppCompatActivity() {
             }
 
             override fun onCancelled(p0: DatabaseError) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                Toast.makeText(applicationContext, "dibatalkan", Toast.LENGTH_SHORT).show()
             }
 
         })
@@ -53,9 +55,10 @@ class MainPage : AppCompatActivity() {
                 list = ArrayList()
                 for (dataSnapshot in it.children){
                     val addDataAll = dataSnapshot.getValue(ModelBook::class.java)
-                    list.add(addDataAll!!)
+                    addDataAll!!.key = dataSnapshot.key
+                    list.add(addDataAll)
                 }
-                bookAdapter = AdapterBook(applicationContext, list)
+                bookAdapter = AdapterBook(this@MainPage, list)
                 rcView.adapter = bookAdapter
             }
 
@@ -69,4 +72,22 @@ class MainPage : AppCompatActivity() {
             startActivity(Intent(this, AddData::class.java))
         }
     }
+
+
+    override fun onDeleteData(buku: ModelBook) {
+        val prefsHelper = PrefsHelper(this)
+        dbRef = FirebaseDatabase.getInstance().getReference("dataBuku/${prefsHelper.getUID()}")
+        dbRef.child(buku.key!!).removeValue().addOnSuccessListener {
+            Toast.makeText(this, "data berhasil dihapus", Toast.LENGTH_SHORT).show()
+            bookAdapter!!.notifyDataSetChanged()
+        }
+    }
+
+    override fun onUpdateData(buku: ModelBook) {
+        val intent = Intent(this, AddData::class.java)
+        intent.putExtra("data", buku)
+        intent.putExtra("update", true)
+        startActivity(intent)
+    }
+
 }
