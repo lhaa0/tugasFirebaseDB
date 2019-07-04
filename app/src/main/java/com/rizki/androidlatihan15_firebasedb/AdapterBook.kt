@@ -7,10 +7,12 @@ import android.view.Display
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 class AdapterBook : RecyclerView.Adapter<AdapterBook.BukuViewHolder> {
 
@@ -40,6 +42,11 @@ class AdapterBook : RecyclerView.Adapter<AdapterBook.BukuViewHolder> {
         holder.tv_penulis.text = bukuModel.penulis
         holder.tv_tanggal.text = bukuModel.tanggal
         holder.tv_judul.text = bukuModel.judulBuku
+        Glide.with(mContext)
+            .load(bukuModel.image)
+            .centerCrop()
+            .error(R.drawable.ic_launcher_background)
+            .into(holder.img_list)
         holder.ll_contact.setOnLongClickListener(object :View.OnLongClickListener {
             override fun onLongClick(v: View?): Boolean {
                 val builder = AlertDialog.Builder(mContext)
@@ -67,11 +74,13 @@ class AdapterBook : RecyclerView.Adapter<AdapterBook.BukuViewHolder> {
         var tv_penulis : TextView
         var tv_tanggal : TextView
         var tv_judul : TextView
+        var img_list : ImageView
         init {
             ll_contact = itemview.findViewById(R.id.ll_contact)
             tv_penulis = itemview.findViewById(R.id.tv_penulis)
             tv_judul = itemview.findViewById(R.id.tv_judul)
             tv_tanggal = itemview.findViewById(R.id.tv_tanggal)
+            img_list = itemview.findViewById(R.id.img_list)
         }
     }
 

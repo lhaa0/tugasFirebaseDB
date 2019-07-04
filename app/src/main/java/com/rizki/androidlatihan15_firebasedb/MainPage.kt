@@ -1,13 +1,11 @@
 package com.rizki.androidlatihan15_firebasedb
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log.e
-import android.view.Display
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.main_page.*
@@ -70,6 +68,10 @@ class MainPage : AppCompatActivity(), AdapterBook.FirebaseDataListener {
 
         fab_.setOnClickListener {
             startActivity(Intent(this, AddData::class.java))
+        }
+
+        fab_image.setOnClickListener {
+            startActivity(Intent(this, UploadFireStorage::class.java))
         }
     }
 

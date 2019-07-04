@@ -10,6 +10,7 @@ data class ModelBook (
     var tanggal : String? = null,
     var judulBuku : String? = null,
     var desc : String? = null,
+    var image : String? = null,
     var key : String? = null
 
 ) : Serializable
